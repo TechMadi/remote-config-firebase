@@ -1,27 +1,146 @@
-# RemoteConfig
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.6.
+# Dynamic App Experiences with Remote Config
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Firebase Introduction 
+A  development platform to build  mobile or  web apps 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+Other Firebase Features 
+- Build 
+- Run ( We are here)
+- Analytics 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+# Remote Config
+Easy way of making  updates to your  product 
+Not  programatically , but in an operations standpoint 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Eg: 
+- Need to publish and update every time
+- Show   some parts based on  a location , type of user 
+- Enable , disable content
 
-## Running end-to-end tests
+#
+<div style="background:white;">
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![Realtime  Remote Config](https://firebase.google.com/static/docs/remote-config/images/real-time-client-server.png)
 
-## Further help
+</div>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+ 
+### Use Cases 
+- A/B testing - rolling out different features 
+- Personalized UX - customize  view eg  Language , Geographic user preference 
+- Phased feature rollouts 
+- Experiment app behaviour - better user  engagement 
+- Feature flag - disable  certain features /  tests 
+- Kill switch -  disable problem matic features 
+
+
+## Demo 
+Creating a sample remote config 
+Name-Value-action 
+
+```
+ng new projectName
+```
+
+## Body of a Remote Config
+ What  is the remote config instance made  up of 
+
+```typescript
+// code
+```
+
+## Parameter Vs Parameter Groups 
+
+## Remote Templates 
+```json
+      {
+        "conditions": [
+          {
+            "name": "ios",
+            "expression": "device.os == 'ios'"
+          }
+        ],
+        "parameters": {
+          "welcome_message": {
+            "defaultValue": {
+              "value": "Welcome to this sample app"
+            },
+            "conditionalValues": {
+              "ios": {
+                "value": "Welcome to this sample iOS app"
+              }
+            }
+          },
+          "welcome_message_caps": {
+            "defaultValue": {
+              "value": "false"
+            }
+          },
+          "header_text": {
+            "defaultValue": {
+              "useInAppDefault": true
+            }
+          }
+        },
+        "version": {
+          "versionNumber": "28",
+          "updateTime": "2020-05-14T18:39:38.994Z",
+          "updateUser": {
+            "email": "user@google.com"
+          },
+          "updateOrigin": "CONSOLE",
+          "updateType": "INCREMENTAL_UPDATE"
+        }
+      }
+// Accredited to Google
+```
+
+## Core  Functions
+
+``` typescript
+
+//Listen  on   any changes
+ addOnConfigUpdateListener()
+
+//Fetch all  configs 
+fetch()
+
+//fetch and activate
+fetchAndActivate()
+
+//Get a remote instance
+getRemoteConfig()
+
+```
+
+
+## Best Practices 
+- Have default values in json
+- Advisable to have a teh default time fetch to be 12hrs 
+
+
+## Next Challenges 
+- How does it intergrate with cloud functions 
+- How does it work with A/B testing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

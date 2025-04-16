@@ -23,16 +23,16 @@ Eg:
 - Enable , disable content
 
 #
-<div style="background:white;">
+<div style="background-color:white;">
 
-![Realtime  Remote Config](https://firebase.google.com/static/docs/remote-config/images/real-time-client-server.png)
+![Realtime  Remote Config By  Firebase](https://firebase.google.com/static/docs/remote-config/images/real-time-client-server.png)
 
 </div>
 
  
 ### Use Cases 
 - A/B testing - rolling out different features 
-- Personalized UX - customize  view eg  Language , Geographic user preference 
+- Personalized UX - customize  view eg  Language , Geographic user preference , Welcome  Messages
 - Phased feature rollouts 
 - Experiment app behaviour - better user  engagement 
 - Feature flag - disable  certain features /  tests 
@@ -47,14 +47,30 @@ Name-Value-action
 ng new projectName
 ```
 
+
 ## Body of a Remote Config
  What  is the remote config instance made  up of 
 
 ```typescript
 // code
+
+this.remoteConfig.app
+this.remoteConfig.defaultConfig
+this.remoteConfig.fetchTimeMillis
+this.remoteConfig.lastFetchStatus
 ```
 
 ## Parameter Vs Parameter Groups 
+
+- Parameter Name - Name 
+- Data  Type  - Json
+- Default Value 
+- Condition - 
+
+## Conditions 
+ Change this if if this is meet
+
+
 
 ## Remote Templates 
 ```json
@@ -100,28 +116,17 @@ ng new projectName
 // Accredited to Google
 ```
 
-## Core  Functions
 
-``` typescript
-
-//Listen  on   any changes
- addOnConfigUpdateListener()
-
-//Fetch all  configs 
-fetch()
-
-//fetch and activate
-fetchAndActivate()
-
-//Get a remote instance
-getRemoteConfig()
-
-```
+ ## How to Update  Remote Configs
+ - Programatically 
+    - ![Using  Remote Config API](https://firebase.google.com/static/docs/remote-config/images/Diagram-RC-REST-v3-580px.png)
+    - Batch import config values ( templates)
+    - Cloud Functions for Firebase
 
 
 ## Best Practices 
 - Have default values in json
-- Advisable to have a teh default time fetch to be 12hrs 
+- Advisable to have a the default time fetch to be 12hrs 
 
 
 ## Next Challenges 

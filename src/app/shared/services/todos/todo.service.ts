@@ -9,7 +9,7 @@ import { collection, Firestore, getDocs } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 
 export interface ITodo {
-	id: string;
+	id?: string;
 	name: string;
 	completed: boolean;
 }
@@ -32,12 +32,12 @@ export class TodoService {
 		})) as ITodo[];
 	}
 
-	async addTask(task: { title: string; completed?: boolean }): Promise<string> {
+	async addTodo(todo: ITodo): Promise<string> {
 		const todosRef = collection(this.firestore, "todo");
 
 		const docRef = await addDoc(todosRef, {
-			name: task.title,
-			completed: task.completed ?? false,
+			name: todo.name,
+			completed: todo.completed ?? false,
 			createdAt: serverTimestamp(), // auto server timestamp
 		});
 

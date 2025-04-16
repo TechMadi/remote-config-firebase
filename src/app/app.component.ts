@@ -16,44 +16,35 @@ export class AppComponent {
 	todoForm = new FormGroup({
 		task: new FormControl(""),
 	});
+	todos: ITodo[] = [];
+
 	todoService = inject(TodoService);
 	remoteConfigService = inject(RemoteConfigService);
+
 	showButton = signal(false);
-	addTodo = signal(true);
-	todos: ITodo[] = [];
+	showAddTodo = signal(true);
 
 	ngOnInit() {
 		this.fetchTodos();
 		this.fetchConfigs();
 	}
 
+	// Get Todos
 	async fetchTodos() {
 		this.todos = await this.todoService.getTodos();
 
 		console.log(this.todos);
 	}
 
-	async fetchConfigs() {
-		await this.remoteConfigService.intiliazeRemoteConfig();
-
-		let profileButton = await this.remoteConfigService.getConfigValue(
-			"enable_delete_button_profile_page",
-		);
-
-		let isEdge = await this.remoteConfigService.getConfigValue("add_a_todo");
-
-		this.showButton.set(profileButton.asBoolean());
-		this.addTodo.set(isEdge.asBoolean());
-	}
-
-	async addTask() {
+	// Add Todo
+	async addTodo() {
 		console.log(this.todoForm.value);
 		let task = {
-			title: this.todoForm.value.task as string,
+			name: this.todoForm.value.task as string,
 			completed: false,
 		};
 
-		let taskId = await this.todoService.addTask(task);
+		let taskId = await this.todoService.addTodo(task);
 
 		if (taskId) {
 			alert("Success");
@@ -63,5 +54,31 @@ export class AppComponent {
 
 		this.fetchConfigs();
 		this.todoForm.reset();
+	}
+
+	// Intiate the  configs
+	async fetchConfigs() {
+		// Intialize the config
+
+		await this.remoteConfigService.intiliazeRemoteConfig();
+
+		// fetch the configs
+
+		let profileButton = await this.remoteConfigService.getConfigValue(
+			"enable_user_sign_in",
+		);
+
+		console.log(profileButton, "Profile Button");
+
+		let isBroswerValid = await this.remoteConfigService.getConfigValue(
+			"add_new_todo",
+		);
+
+		console.log(isBroswerValid, "Browser State");
+
+		// Do you as a developer
+		this.showButton.set(profileButton.asBoolean());
+
+		this.showAddTodo.set(isBroswerValid.asBoolean());
 	}
 }

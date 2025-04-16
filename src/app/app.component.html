@@ -1,3 +1,4 @@
+<!-- Start Of Header -->
 <section>
 	<div class="header">
 		<h2>Remote Config Todos</h2>
@@ -11,24 +12,29 @@
 		}
 	</div>
 </section>
+<!-- End Of Header -->
 
-@if (addTodo()) {
-<form
-	[formGroup]="todoForm"
-	(ngSubmit)="addTask()"
->
-	<input
-		type="text"
-		placeholder="New Task"
-		formControlName="task"
-		tabindex="1"
-	/>
-</form>
-}
+<!-- Start of Todos -->
+<section>
+	@if (showAddTodo()) {
+	<form
+		[formGroup]="todoForm"
+		(ngSubmit)="addTodo()"
+	>
+		<input
+			type="text"
+			placeholder="New Task"
+			formControlName="task"
+			tabindex="1"
+		/>
+	</form>
+	}
 
-<ul>
-	@if (todos.length===0) { No todos available } @else { @for (todo of todos;
-	track $index) {
-	<li>{{ todo.name }}</li>
-	} }
-</ul>
+	<ul>
+		@if (todos.length===0) { No todos available } @else { @for (todo of todos;
+		track $index) {
+		<li>{{ todo.name }}</li>
+		} }
+	</ul>
+</section>
+<!-- End of Todos -->

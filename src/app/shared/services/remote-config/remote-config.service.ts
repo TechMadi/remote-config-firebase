@@ -15,17 +15,20 @@ export class RemoteConfigService {
 	private app: FirebaseApp = inject(FirebaseApp);
 	constructor() {
 		this.remoteConfig = getRemoteConfig(this.app);
-		this.remoteConfig.app;
-		this.remoteConfig.defaultConfig;
-		this.remoteConfig.fetchTimeMillis;
-		this.remoteConfig.lastFetchStatus;
-		this.remoteConfig.defaultConfig = {};
+		// this.remoteConfig.app;
+		// this.remoteConfig.defaultConfig;
+		// this.remoteConfig.fetchTimeMillis;
+		// this.remoteConfig.lastFetchStatus;
+		this.remoteConfig.defaultConfig = {
+			//  default template
+		};
 
 		this.remoteConfig.settings.minimumFetchIntervalMillis = 0;
 	}
 
 	public async intiliazeRemoteConfig() {
 		try {
+			// fetch
 			await fetchAndActivate(this.remoteConfig);
 
 			console.log("Configs fetched and activated");
